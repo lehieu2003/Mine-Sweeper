@@ -14,7 +14,6 @@ public class ButtonSmile extends JButton {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-//        paint(g);
         g.drawImage(panelNotification.getGamePanel().getGameFrame().getLoadData().getListImage().get("smile"), 0, 0, getWidth(), getHeight(), null);
     }
 }

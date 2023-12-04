@@ -8,13 +8,13 @@ public class GameFrame extends JFrame{
     private LoadData loadData;
     private GamePanel gamePanel;
 
-    public GameFrame(){
+    public GameFrame(int width, int height, int boom){
         loadData = new LoadData();
         // set icon for the gameFrame
         setIconImage(loadData.getListImage().get("icon"));
 
         // add gamePanel into the gameFrame
-        gamePanel = new GamePanel(9, 9, 10,this);
+        gamePanel = new GamePanel(width, height, boom,this);
         setLayout(new BorderLayout());
 
         add(gamePanel,BorderLayout.CENTER);
@@ -29,7 +29,7 @@ public class GameFrame extends JFrame{
     } 
 
     public static void main(String[] args){
-        GameFrame gameFrame = new GameFrame();
+        GameFrame gameFrame = new GameFrame(9,9,10);
     }
 
     public LoadData getLoadData() {
