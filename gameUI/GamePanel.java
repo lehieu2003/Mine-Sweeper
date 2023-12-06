@@ -1,7 +1,6 @@
 package gameUI;
 
 import control.World;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -45,10 +44,7 @@ public class GamePanel extends JPanel implements MouseListener {
         this.w = w;
         this.h = h;
         this.gameFrame = gameFrame;
-
-        // get size of this panel
-//        setHeight(500);
-//        setWidth(500);
+        this.boom = bombNumber;
 
         world = new World(w, h, bombNumber);
         setLayout(new BorderLayout());
@@ -56,6 +52,7 @@ public class GamePanel extends JPanel implements MouseListener {
         add(panel1, BorderLayout.NORTH);
         panel2 = new PanelPlayer(this);
         add(panel2, BorderLayout.CENTER);
+
 
 
     }
@@ -86,18 +83,32 @@ public class GamePanel extends JPanel implements MouseListener {
         ButtonPlay[][] buttons = panel2.getButtons();
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons[i].length; j++) {
-                if (e.getButton() == 1 && e.getSource() == buttons[i][j]) {
+                if (e.getButton() == 1 && e.getSource() == buttons[i][j] && !world.getArrayFlag()[i][j]) {
                     if (!world.open(i, j)) {
-                        int opt = JOptionPane.showConfirmDialog(null, "You lose! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
-                        if (opt == JOptionPane.YES_OPTION) {
-                            gameFrame.setVisible(false);
-                            int w = this.getW();
-                            int h = this.getH();
-                            new GameFrame(w, h, boom);
-                        }else {
-                            world.fullTrue();
+                        if (world.isComplete()) {
+                            int option = JOptionPane.showConfirmDialog(null, "You lost! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
+                            if (option == JOptionPane.YES_OPTION) {
+                                gameFrame.setVisible(false);
+                                int w = this.getW();
+                                int h = this.getH();
+                                int boom = this.getBoom();
+                                new GameFrame(w, h, boom);
+                            } else {
+                                world.fullTrue();
+                            }
+                        } else if (world.isEnd()) {
+                            int option = JOptionPane.showConfirmDialog(null, "You won! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
+                            if (option == JOptionPane.YES_OPTION) {
+                                gameFrame.setVisible(false);
+                                int w = this.getW();
+                                int h = this.getH();
+                                new GameFrame(w, h, boom);
+                            }
                         }
                     }
+                }
+                else if (e.getButton() == 3 && e.getSource() == buttons[i][j]){
+                    world.flag(i,j);
                 }
             }
         }

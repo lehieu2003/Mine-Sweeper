@@ -21,7 +21,7 @@ public class LoadData {
 
             BufferedImage image = ImageIO.read(new File("minesweeper.png"));
             listImage.put("rectangle", image.getSubimage(0,39,16,16));
-            listImage.put("co", image.getSubimage(16,39,16,16));
+            listImage.put("flag", image.getSubimage(16,39,16,16));
             listImage.put("boomRed", image.getSubimage(32,39,16,16));
             listImage.put("boomX", image.getSubimage(48,39,16,16));
             listImage.put("boom", image.getSubimage(64,39,16,16));
@@ -50,7 +50,7 @@ public class LoadData {
             listImage.put("8", image.getSubimage(104,0,13,23));
             listImage.put("9", image.getSubimage(117,0,13,23));
             listImage.put("infinity", image.getSubimage(120,0,13,23));
-            listImage.put("tich", image.getSubimage(140,49,7,7));
+            listImage.put("tick", image.getSubimage(140,49,7,7));
         }catch (Exception e) {
             e.printStackTrace();
         }

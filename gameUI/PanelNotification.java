@@ -25,7 +25,11 @@ public class PanelNotification extends JPanel{
         lbTime = gamePanel.getWorld().getTime();
         lbBoom= gamePanel.getWorld().getLbBoom();
 
-        panel1.add(lbBoom = new LabelNumber(this,"000"));
+        String boom = String.valueOf(gamePanel.getWorld().getBoom());
+        if (boom.length() == 1 || boom.length() == 2) boom = "0" + boom;
+        else boom = boom;
+
+        panel1.add(lbBoom = new LabelNumber(this,boom));
         panel2.add(lbTime = new LabelNumber(this,"121"));
         buttonSmile = gamePanel.getWorld().getButtonSmile();
         panel3.add(buttonSmile = new ButtonSmile(this));

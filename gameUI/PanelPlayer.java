@@ -8,7 +8,7 @@ public class PanelPlayer extends JPanel {
     private ButtonPlay[][] buttons;
     public PanelPlayer(GamePanel gamePanel){
         this.gamePanel = gamePanel;
-        setLayout(new GridLayout(9, 9));
+        setLayout(new GridLayout(gamePanel.getW(), gamePanel.getH()));
 
         buttons = gamePanel.getWorld().getButtons();
         setBorder(BorderFactory.createLoweredBevelBorder());

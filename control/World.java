@@ -1,5 +1,6 @@
 package control;
 
+import com.sun.security.auth.NTDomainPrincipal;
 import gameUI.ButtonPlay;
 import gameUI.ButtonSmile;
 import gameUI.LabelNumber;
@@ -19,23 +20,24 @@ public class World extends JPanel {
     private Random rand;
     private int[][] arrayBom;
     private boolean[][] arrayBoolean;
+    private boolean[][] arrayFlag;
     private int boom; // check whether the player has won or not
 
-    public World(int width, int height,int bombNumber) {
+    public World(int width, int height, int bombNumber) {
         this.boom = bombNumber;
 
-        buttons = new ButtonPlay[ width][height];
+        buttons = new ButtonPlay[width][height];
         arrayBom = new int[width][height];
         arrayBoolean = new boolean[width][height];
-
+        arrayFlag = new boolean[width][height];
 
         rand = new Random();
 
-        createArrayBom(bombNumber,width,height);
+        createArrayBom(bombNumber, width, height);
         fillNumber();
 
-        for (int i = 0; i < buttons.length; i++){
-            for (int j = 0; j < buttons[i].length; j++){
+        for (int i = 0; i < buttons.length; i++) {
+            for (int j = 0; j < buttons[i].length; j++) {
                 System.out.print(arrayBom[i][j] + " ");
             }
             System.out.println();
@@ -48,17 +50,17 @@ public class World extends JPanel {
 
         arrayBom[locationX][locationY] = -1;
         int count = 1;
-        while (count < bombNumber){
+        while (count < bombNumber) {
             locationX = rand.nextInt(width);
             locationY = rand.nextInt(height);
-            if (arrayBom[locationX][locationY] != -1){
+            if (arrayBom[locationX][locationY] != -1) {
                 arrayBom[locationX][locationY] = -1;
                 count++;
             }
         }
     }
 
-    public void fillNumber(){
+    public void fillNumber() {
         for (int i = 0; i < arrayBom.length; i++) {
             for (int j = 0; j < arrayBom[i].length; j++) {
                 if (arrayBom[i][j] == 0) {
@@ -77,41 +79,64 @@ public class World extends JPanel {
         }
     }
 
-    public boolean open(int i, int j){
-        if (checkWin()){
-            isComplete = true;
-            return true;
-        }
-        if (!isComplete && !isEnd){
-            if (!arrayBoolean[i][j]){
-                if(arrayBom[i][j] == 0) {
+    public boolean open(int i, int j) {
+        if (!arrayFlag[i][j]) {
+            if (!isComplete && !isEnd) {
+                if (!arrayBoolean[i][j]) {
+                    if (arrayBom[i][j] == 0) {
 
-                    arrayBoolean[i][j] = true;
-                    buttons[i][j].setNumber(arrayBom[i][j]);
-                    buttons[i][j].repaint();
-                    for (int l = i - 1; l <= i + 1; l++) {
-                        for (int k = j - 1; k <= j + 1; k++) {
-                            if (l >= 0 && l <= arrayBom.length - 1 && k >= 0 && k <= arrayBom[i].length - 1)
-                                open(l, k); // use recursion until the number is not 0
+                        arrayBoolean[i][j] = true;
+                        buttons[i][j].setNumber(0);
+                        buttons[i][j].repaint();
+
+                        if (checkWin()) {
+                            isEnd = true;
+                            fullTrue();
+                            return false;
+                        }
+
+                        for (int l = i - 1; l <= i + 1; l++) {
+                            for (int k = j - 1; k <= j + 1; k++) {
+                                if (l >= 0 && l <= arrayBom.length - 1 && k >= 0 && k <= arrayBom[i].length - 1)
+                                    if (!arrayBoolean[l][k]) {
+                                        open(l, k); // use recursion until the number is not 0
+
+                                    }
+                            }
+                        }
+                    } else {
+                        arrayBoolean[i][j] = true;
+                        int number = arrayBom[i][j];
+                        if (number != -1) {
+                            buttons[i][j].setNumber(number);
+                            return true;
                         }
                     }
-                }else{
-                    arrayBoolean[i][j] = true;
-                    int number = arrayBom[i][j];
-                    if (number != -1) {
-                        buttons[i][j].setNumber(number);
-                        return true;
-                    }
                 }
-            }
-            if (arrayBom[i][j] == -1){
+                if (arrayBom[i][j] == -1) {
+                    buttons[i][j].setNumber(11);
+                    buttons[i][j].repaint();
+                    isComplete = true;
+
+                    for (int j2 = 0; j2 < arrayBom.length; j2++) {
+                        for (int k = 0; k < arrayBom[j2].length; k++) {
+                            if (arrayBom[j2][k] == -1 && !arrayBoolean[j2][k]) {
+                                buttons[j2][k].setNumber(10);
+                                buttons[j2][k].repaint();
+                            }
+                        }
+                    }
+
+
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
                 return false;
             }
-            else{
-                return true;
-            }
         }
-        return false;
+        return true;
     }
 
     public void fullTrue(){
@@ -135,6 +160,21 @@ public class World extends JPanel {
             return true;
         }
         return false;
+    }
+
+    public void flag(int i, int j){
+        if (!arrayBoolean[i][j]){
+            if (arrayFlag[i][j]) {
+                arrayFlag[i][j] = false;
+                buttons[i][j].setNumber(-1);
+                buttons[i][j].repaint();
+            }else{
+                arrayFlag[i][j] = true;
+                buttons[i][j].setNumber(9);
+                buttons[i][j].repaint();
+            }
+        }
+
     }
 
     public ButtonPlay[][] getButtons() {
@@ -198,5 +238,13 @@ public class World extends JPanel {
 
     public void setComplete(boolean complete) {
         isComplete = complete;
+    }
+
+    public boolean[][] getArrayFlag() {
+        return arrayFlag;
+    }
+
+    public void setArrayFlag(boolean[][] arrayFlag) {
+        this.arrayFlag = arrayFlag;
     }
 }
