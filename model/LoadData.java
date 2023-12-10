@@ -34,11 +34,6 @@ public class LoadData {
             listImage.put("b6", image.getSubimage(96,23,16,16));
             listImage.put("b7", image.getSubimage(112,23,16,16));
             listImage.put("b8", image.getSubimage(128,23,16,16));
-            listImage.put("smile", image.getSubimage(0,55,26,26));
-            listImage.put("smilePress", image.getSubimage(26,55,26,26));
-            listImage.put("smilePressPlay", image.getSubimage(52,55,26,26));
-            listImage.put("smileLose", image.getSubimage(78,55,26,26));
-            listImage.put("smileWin", image.getSubimage(104,55,26,26));
             listImage.put("0", image.getSubimage(0,0,13,23));
             listImage.put("1", image.getSubimage(13,0,13,23));
             listImage.put("2", image.getSubimage(26,0,13,23));

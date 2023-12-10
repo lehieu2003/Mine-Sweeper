@@ -2,7 +2,7 @@ package control;
 
 import com.sun.security.auth.NTDomainPrincipal;
 import gameUI.ButtonPlay;
-import gameUI.ButtonSmile;
+//import gameUI.ButtonSmile;
 import gameUI.LabelNumber;
 
 import javax.swing.*;
@@ -12,7 +12,6 @@ import java.util.Random;
 
 public class World extends JPanel {
     private ButtonPlay[][] buttons;
-    private ButtonSmile buttonSmile;
     private boolean isComplete;
     private boolean isEnd;
     private LabelNumber time;
@@ -194,12 +193,12 @@ public class World extends JPanel {
         this.buttons = buttons;
     }
 
-    public ButtonSmile getButtonSmile() {
-        return buttonSmile;
-    }
-    public void setButtonSmile(ButtonSmile buttonSmile) {
-        this.buttonSmile = buttonSmile;
-    }
+//    public ButtonSmile getButtonSmile() {
+//        return buttonSmile;
+//    }
+//    public void setButtonSmile(ButtonSmile buttonSmile) {
+//        this.buttonSmile = buttonSmile;
+//    }
 
     public LabelNumber getTime() {
         return time;

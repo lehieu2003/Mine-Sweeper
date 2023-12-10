@@ -2,11 +2,12 @@ package gameUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class PanelNotification extends JPanel{
     private GamePanel gamePanel;
-    private JPanel panel1,panel2,panel3;
-    private ButtonSmile buttonSmile;
+    private JPanel panel1,panel2;
     private JLabel lbTime,lbBoom;
 
     public PanelNotification(GamePanel gamePanel){
@@ -20,7 +21,6 @@ public class PanelNotification extends JPanel{
         // add each panel into the main panel and set the direction
         add(panel1 = new JPanel(),BorderLayout.WEST);
         add(panel2 = new JPanel(),BorderLayout.EAST);
-        add(panel3 = new JPanel(),BorderLayout.CENTER);
 
         lbTime = gamePanel.getWorld().getTime();
         lbBoom= gamePanel.getWorld().getLbBoom();
@@ -29,10 +29,8 @@ public class PanelNotification extends JPanel{
         if (boom.length() == 1 || boom.length() == 2) boom = "0" + boom;
         else boom = boom;
 
-        panel1.add(lbBoom = new LabelNumber(this,boom));
-        panel2.add(lbTime = new LabelNumber(this,"121"));
-        buttonSmile = gamePanel.getWorld().getButtonSmile();
-        panel3.add(buttonSmile = new ButtonSmile(this));
+        panel1.add(lbBoom = new LabelNumber(this,"000"));
+        panel2.add(lbTime = new LabelNumber(this,"000"));
     }
 
     public GamePanel getGamePanel() {
