@@ -95,48 +95,59 @@ public class World extends JPanel {
                             return false;
                         }
 
+                        // It checks boundaries to ensure that the recursion doesn't go out of bounds.
                         for (int l = i - 1; l <= i + 1; l++) {
                             for (int k = j - 1; k <= j + 1; k++) {
                                 if (l >= 0 && l <= arrayBom.length - 1 && k >= 0 && k <= arrayBom[i].length - 1)
-                                    if (!arrayBoolean[l][k]) {
+                                    if (!arrayBoolean[l][k]) { // if the cell is not opened yet
                                         open(l, k); // use recursion until the number is not 0
-
                                     }
                             }
                         }
                     } else {
-                        arrayBoolean[i][j] = true;
                         int number = arrayBom[i][j];
                         if (number != -1) {
+                            arrayBoolean[i][j] = true;
                             buttons[i][j].setNumber(number);
+                            buttons[i][j].repaint();
+
+                            if (checkWin()) {
+                                isEnd = true;
+                                fullTrue();
+                                return false;
+                            }
+
                             return true;
                         }
                     }
                 }
+
                 if (arrayBom[i][j] == -1) {
                     buttons[i][j].setNumber(11);
                     buttons[i][j].repaint();
                     isComplete = true;
 
-                    for (int j2 = 0; j2 < arrayBom.length; j2++) {
-                        for (int k = 0; k < arrayBom[j2].length; k++) {
-                            if (arrayBom[j2][k] == -1 && !arrayBoolean[j2][k]) {
-                                buttons[j2][k].setNumber(10);
-                                buttons[j2][k].repaint();
+                    for (int l = 0; l < arrayBom.length; l++) {
+                        for (int k = 0; k < arrayBom[l].length; k++) {
+                            if (arrayBom[l][k] == -1 && !arrayBoolean[l][k]) {
+                                buttons[l][k].setNumber(10);
+                                buttons[l][k].repaint();
                             }
                         }
                     }
-
-
                     return false;
                 } else {
-                    return true;
+                    if(checkWin()) {
+                        isEnd = true;
+                        fullTrue();
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
-            } else {
-                return false;
             }
         }
-        return true;
+        return false;
     }
 
     public void fullTrue(){
@@ -144,7 +155,6 @@ public class World extends JPanel {
             for (int j = 0; j < arrayBoolean[i].length; j++){
                 arrayBoolean[i][j] = true;
             }
-
         }
     }
     public boolean checkWin(){
@@ -174,7 +184,6 @@ public class World extends JPanel {
                 buttons[i][j].repaint();
             }
         }
-
     }
 
     public ButtonPlay[][] getButtons() {

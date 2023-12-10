@@ -10,7 +10,6 @@ public class ButtonPlay extends JButton {
         number = -1;
         this.panelPlayer = panelPlayer;
         setPreferredSize(new Dimension(30, 30));
-
     }
     @Override
     protected void paintComponent(Graphics g){
@@ -65,7 +64,4 @@ public class ButtonPlay extends JButton {
     public void setNumber(int number){
         this.number = number;
     }
-
-
-
 }

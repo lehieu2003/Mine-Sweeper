@@ -52,9 +52,6 @@ public class GamePanel extends JPanel implements MouseListener {
         add(panel1, BorderLayout.NORTH);
         panel2 = new PanelPlayer(this);
         add(panel2, BorderLayout.CENTER);
-
-
-
     }
 
     public World getWorld() {

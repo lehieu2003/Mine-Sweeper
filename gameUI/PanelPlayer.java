@@ -15,7 +15,7 @@ public class PanelPlayer extends JPanel {
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons[i].length; j++) {
                 add(buttons[i][j] = new ButtonPlay(this));
-                buttons[i][j].addMouseListener(gamePanel);
+                buttons[i][j].addMouseListener(gamePanel); // adding a MouseListener to each ButtonPlay object in the grid
             }
         }
     }
