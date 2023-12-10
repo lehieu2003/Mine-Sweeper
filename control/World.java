@@ -1,13 +1,9 @@
 package control;
 
-import com.sun.security.auth.NTDomainPrincipal;
 import gameUI.ButtonPlay;
-//import gameUI.ButtonSmile;
 import gameUI.LabelNumber;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.Arrays;
 import java.util.Random;
 
 public class World extends JPanel {
@@ -122,7 +118,7 @@ public class World extends JPanel {
                 }
 
                 if (arrayBom[i][j] == -1) {
-                    buttons[i][j].setNumber(11);
+                    buttons[i][j].setNumber(10);
                     buttons[i][j].repaint();
                     isComplete = true;
 

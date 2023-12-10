@@ -3,11 +3,8 @@ package model;
 import gameUI.GamePanel;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.nio.Buffer;
 import java.util.HashMap;
 
 public class LoadData {
@@ -23,8 +20,6 @@ public class LoadData {
             listImage.put("rectangle", image.getSubimage(0,39,16,16));
             listImage.put("flag", image.getSubimage(16,39,16,16));
             listImage.put("boomRed", image.getSubimage(32,39,16,16));
-            listImage.put("boomX", image.getSubimage(48,39,16,16));
-            listImage.put("boom", image.getSubimage(64,39,16,16));
             listImage.put("b0", image.getSubimage(0,23,16,16));
             listImage.put("b1", image.getSubimage(16,23,16,16));
             listImage.put("b2", image.getSubimage(32,23,16,16));

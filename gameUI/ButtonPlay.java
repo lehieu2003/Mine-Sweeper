@@ -49,13 +49,7 @@ public class ButtonPlay extends JButton {
                 g.drawImage(panelPlayer.getGamePanel().getGameFrame().getLoadData().getListImage().get("flag"), 0, 0, getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case 10:
-                g.drawImage(panelPlayer.getGamePanel().getGameFrame().getLoadData().getListImage().get("boom"), 0, 0, getPreferredSize().width, getPreferredSize().height, null);
-                break;
-            case 11:
                 g.drawImage(panelPlayer.getGamePanel().getGameFrame().getLoadData().getListImage().get("boomRed"), 0, 0, getPreferredSize().width, getPreferredSize().height, null);
-                break;
-            case 12:
-                g.drawImage(panelPlayer.getGamePanel().getGameFrame().getLoadData().getListImage().get("boomX"), 0, 0, getPreferredSize().width, getPreferredSize().height, null);
                 break;
             default:
                 break;
