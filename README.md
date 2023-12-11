@@ -2,11 +2,6 @@
 # Minesweeper Game
 Minesweeper is a classic single-player puzzle game that originated in the 1960s. The game became widely popular when it was included in the Microsoft Windows operating system.
 
-## Screenshots
-
-![App Screenshot](https://cdn.discordapp.com/attachments/745580405088059442/1107705732389933146/Screenshot_2023-05-15_230713.png)
-
-
 ## Control
 
 Minesweeper is controlled using the mouse. The default controls are:
