@@ -44,7 +44,6 @@ public class LoadData {
         }catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public HashMap<String, BufferedImage> getListImage() {

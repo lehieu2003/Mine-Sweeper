@@ -74,51 +74,126 @@ public class World extends JPanel {
         }
     }
 
+//    public boolean open(int i, int j) {
+//        if (!arrayFlag[i][j]) {
+//            if (!isComplete && !isEnd) {
+//                if (!arrayBoolean[i][j]) {
+//                    if (arrayBom[i][j] == 0) {
+//
+//                        arrayBoolean[i][j] = true;
+//                        buttons[i][j].setNumber(0);
+//                        buttons[i][j].repaint();
+//
+//                        if (checkWin()) {
+//                            isEnd = true;
+//                            fullTrue();
+//                            return false;
+//                        }
+//
+//                        // It checks boundaries to ensure that the recursion doesn't go out of bounds.
+//                        for (int l = i - 1; l <= i + 1; l++) {
+//                            for (int k = j - 1; k <= j + 1; k++) {
+//                                if (l >= 0 && l <= arrayBom.length - 1 && k >= 0 && k <= arrayBom[i].length - 1)
+//                                    if (!arrayBoolean[l][k]) { // if the cell is not opened yet
+//                                        open(l, k); // use recursion until the number is not 0
+//                                    }
+//                            }
+//                        }
+//                    } else {
+//                        int number = arrayBom[i][j];
+//                        if (number != -1) {
+//                            arrayBoolean[i][j] = true;
+//                            buttons[i][j].setNumber(number);
+//                            buttons[i][j].repaint();
+//
+//                            if (checkWin()) {
+//                                isEnd = true;
+//                                fullTrue();
+//                                return false;
+//                            }
+//
+//                            return true;
+//                        }
+//                    }
+//                }
+//
+//                if (arrayBom[i][j] == -1) {
+//                    buttons[i][j].setNumber(10);
+//                    buttons[i][j].repaint();
+//                    isComplete = true;
+//
+//                    for (int l = 0; l < arrayBom.length; l++) {
+//                        for (int k = 0; k < arrayBom[l].length; k++) {
+//                            if (arrayBom[l][k] == -1 && !arrayBoolean[l][k]) {
+//                                buttons[l][k].setNumber(10);
+//                                buttons[l][k].repaint();
+//                            }
+//                        }
+//                    }
+//                    return false;
+//                } else {
+//                    if(checkWin()) {
+//                        isEnd = true;
+//                        fullTrue();
+//                        return false;
+//                    } else {
+//                        return true;
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+//    }
     public boolean open(int i, int j) {
-        if (!arrayFlag[i][j]) {
-            if (!isComplete && !isEnd) {
-                if (!arrayBoolean[i][j]) {
-                    if (arrayBom[i][j] == 0) {
+        if (canOpenCell(i, j)) {
+            if (arrayBom[i][j] == 0) {
+                openEmptyCell(i, j);
 
-                        arrayBoolean[i][j] = true;
-                        buttons[i][j].setNumber(0);
-                        buttons[i][j].repaint();
-
-                        if (checkWin()) {
-                            isEnd = true;
-                            fullTrue();
-                            return false;
-                        }
-
-                        // It checks boundaries to ensure that the recursion doesn't go out of bounds.
-                        for (int l = i - 1; l <= i + 1; l++) {
-                            for (int k = j - 1; k <= j + 1; k++) {
-                                if (l >= 0 && l <= arrayBom.length - 1 && k >= 0 && k <= arrayBom[i].length - 1)
-                                    if (!arrayBoolean[l][k]) { // if the cell is not opened yet
-                                        open(l, k); // use recursion until the number is not 0
-                                    }
-                            }
-                        }
-                    } else {
-                        int number = arrayBom[i][j];
-                        if (number != -1) {
-                            arrayBoolean[i][j] = true;
-                            buttons[i][j].setNumber(number);
-                            buttons[i][j].repaint();
-
-                            if (checkWin()) {
-                                isEnd = true;
-                                fullTrue();
-                                return false;
-                            }
-
-                            return true;
-                        }
-                    }
+                if (checkWin()) {
+                    handleWin();
+                    return false;
                 }
 
-                if (arrayBom[i][j] == -1) {
-                    buttons[i][j].setNumber(10);
+            } else {
+                openNumberCell(i, j);
+
+                if (checkWin()) {
+                    handleWin();
+                    return false;
+                }
+
+            }
+        }
+        return false;
+    }
+
+    private boolean canOpenCell(int i, int j) {
+        return !arrayFlag[i][j] && !isComplete && !isEnd && !arrayBoolean[i][j];
+    }
+
+    private void openEmptyCell(int i, int j) {
+        arrayBoolean[i][j] = true;
+        buttons[i][j].setNumber(0);
+        buttons[i][j].repaint();
+
+        for (int l = i - 1; l <= i + 1; l++) {
+            for (int k = j - 1; k <= j + 1; k++) {
+                if (isValidCell(l, k) && !arrayBoolean[l][k]) {
+                    open(l, k);
+                }
+            }
+        }
+    }
+
+    private void openNumberCell(int i, int j) {
+        int number = arrayBom[i][j];
+        if (number != -1) {
+            arrayBoolean[i][j] = true;
+            buttons[i][j].setNumber(number);
+            buttons[i][j].repaint();
+        }else{
+            if (number == -1){
+                buttons[i][j].setNumber(10);
                     buttons[i][j].repaint();
                     isComplete = true;
 
@@ -130,20 +205,19 @@ public class World extends JPanel {
                             }
                         }
                     }
-                    return false;
-                } else {
-                    if(checkWin()) {
-                        isEnd = true;
-                        fullTrue();
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
             }
         }
-        return false;
     }
+
+    private void handleWin() {
+        isEnd = true;
+        fullTrue();
+    }
+
+    private boolean isValidCell(int i, int j) {
+        return i >= 0 && i < arrayBom.length && j >= 0 && j < arrayBom[i].length;
+    }
+
 
     public void fullTrue(){
         for(int i = 0; i < arrayBoolean.length; i++){
@@ -188,13 +262,6 @@ public class World extends JPanel {
     public void setButtons(ButtonPlay[][] buttons) {
         this.buttons = buttons;
     }
-
-//    public ButtonSmile getButtonSmile() {
-//        return buttonSmile;
-//    }
-//    public void setButtonSmile(ButtonSmile buttonSmile) {
-//        this.buttonSmile = buttonSmile;
-//    }
 
     public LabelNumber getTime() {
         return time;
