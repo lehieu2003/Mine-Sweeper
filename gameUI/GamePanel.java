@@ -81,6 +81,9 @@ public class GamePanel extends JPanel implements MouseListener {
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons[i].length; j++) {
                 if (e.getButton() == 1 && e.getSource() == buttons[i][j] && !world.getArrayFlag()[i][j]) {
+                    if (!getPanel1().getTime().isRunning()){
+                        getPanel1().getTime().start();
+                    }
                     if (!world.open(i, j)) {
                         if (world.isComplete()) {
                             int option = JOptionPane.showConfirmDialog(null, "You lost! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
@@ -123,6 +126,22 @@ public class GamePanel extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    public PanelNotification getPanel1() {
+        return panel1;
+    }
+
+    public void setPanel1(PanelNotification panel1) {
+        this.panel1 = panel1;
+    }
+
+    public PanelPlayer getPanel2() {
+        return panel2;
+    }
+
+    public void setPanel2(PanelPlayer panel2) {
+        this.panel2 = panel2;
     }
 }
 

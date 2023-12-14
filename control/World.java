@@ -16,7 +16,7 @@ public class World extends JPanel {
     private int[][] arrayBom;
     private boolean[][] arrayBoolean;
     private boolean[][] arrayFlag;
-    private int boom; // check whether the player has won or not
+    private int boom;
 
     public World(int width, int height, int bombNumber) {
         this.boom = bombNumber;
@@ -74,76 +74,6 @@ public class World extends JPanel {
         }
     }
 
-//    public boolean open(int i, int j) {
-//        if (!arrayFlag[i][j]) {
-//            if (!isComplete && !isEnd) {
-//                if (!arrayBoolean[i][j]) {
-//                    if (arrayBom[i][j] == 0) {
-//
-//                        arrayBoolean[i][j] = true;
-//                        buttons[i][j].setNumber(0);
-//                        buttons[i][j].repaint();
-//
-//                        if (checkWin()) {
-//                            isEnd = true;
-//                            fullTrue();
-//                            return false;
-//                        }
-//
-//                        // It checks boundaries to ensure that the recursion doesn't go out of bounds.
-//                        for (int l = i - 1; l <= i + 1; l++) {
-//                            for (int k = j - 1; k <= j + 1; k++) {
-//                                if (l >= 0 && l <= arrayBom.length - 1 && k >= 0 && k <= arrayBom[i].length - 1)
-//                                    if (!arrayBoolean[l][k]) { // if the cell is not opened yet
-//                                        open(l, k); // use recursion until the number is not 0
-//                                    }
-//                            }
-//                        }
-//                    } else {
-//                        int number = arrayBom[i][j];
-//                        if (number != -1) {
-//                            arrayBoolean[i][j] = true;
-//                            buttons[i][j].setNumber(number);
-//                            buttons[i][j].repaint();
-//
-//                            if (checkWin()) {
-//                                isEnd = true;
-//                                fullTrue();
-//                                return false;
-//                            }
-//
-//                            return true;
-//                        }
-//                    }
-//                }
-//
-//                if (arrayBom[i][j] == -1) {
-//                    buttons[i][j].setNumber(10);
-//                    buttons[i][j].repaint();
-//                    isComplete = true;
-//
-//                    for (int l = 0; l < arrayBom.length; l++) {
-//                        for (int k = 0; k < arrayBom[l].length; k++) {
-//                            if (arrayBom[l][k] == -1 && !arrayBoolean[l][k]) {
-//                                buttons[l][k].setNumber(10);
-//                                buttons[l][k].repaint();
-//                            }
-//                        }
-//                    }
-//                    return false;
-//                } else {
-//                    if(checkWin()) {
-//                        isEnd = true;
-//                        fullTrue();
-//                        return false;
-//                    } else {
-//                        return true;
-//                    }
-//                }
-//            }
-//        }
-//        return false;
-//    }
     public boolean open(int i, int j) {
         if (canOpenCell(i, j)) {
             if (arrayBom[i][j] == 0) {

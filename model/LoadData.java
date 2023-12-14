@@ -6,12 +6,13 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 public class LoadData {
-    private HashMap<String, BufferedImage> listImage;
+    private Hashtable<String, BufferedImage> listImage;
 
     public LoadData() {
-        listImage = new HashMap<String, BufferedImage>();
+        listImage = new Hashtable<String , BufferedImage>();
         try {
             BufferedImage imageIcon = ImageIO.read(new File("icon.png"));
             listImage.put("icon", imageIcon);
@@ -46,11 +47,11 @@ public class LoadData {
         }
     }
 
-    public HashMap<String, BufferedImage> getListImage() {
+    public Hashtable<String, BufferedImage> getListImage() {
         return listImage;
     }
 
-    public void setListImage(HashMap<String, BufferedImage> listImage) {
+    public void Hashtable(Hashtable<String, BufferedImage> listImage) {
         this.listImage = listImage;
     }
 }
