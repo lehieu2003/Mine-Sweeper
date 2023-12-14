@@ -1,12 +1,14 @@
 package control;
 
 import gameUI.ButtonPlay;
+import gameUI.GamePanel;
 import gameUI.LabelNumber;
 
 import javax.swing.*;
 import java.util.Random;
 
 public class World extends JPanel {
+    private GamePanel gamePanel;
     private ButtonPlay[][] buttons;
     private boolean isComplete;
     private boolean isEnd;
@@ -16,10 +18,12 @@ public class World extends JPanel {
     private int[][] arrayBom;
     private boolean[][] arrayBoolean;
     private boolean[][] arrayFlag;
+    private int flag1;
     private int boom;
 
-    public World(int width, int height, int bombNumber) {
+    public World(int width, int height, int bombNumber, GamePanel gamePanel){
         this.boom = bombNumber;
+        this.gamePanel = gamePanel;
 
         buttons = new ButtonPlay[width][height];
         arrayBom = new int[width][height];
@@ -174,13 +178,17 @@ public class World extends JPanel {
     public void flag(int i, int j){
         if (!arrayBoolean[i][j]){
             if (arrayFlag[i][j]) {
+                flag1--;
                 arrayFlag[i][j] = false;
                 buttons[i][j].setNumber(-1);
                 buttons[i][j].repaint();
-            }else{
+                gamePanel.getPanel1().updateLbBoom();
+            }else if (flag1 < boom){ // flag1 == boom stop flag
+                flag1++;
                 arrayFlag[i][j] = true;
                 buttons[i][j].setNumber(9);
                 buttons[i][j].repaint();
+                gamePanel.getPanel1().updateLbBoom();
             }
         }
     }
@@ -247,5 +255,13 @@ public class World extends JPanel {
 
     public void setArrayFlag(boolean[][] arrayFlag) {
         this.arrayFlag = arrayFlag;
+    }
+
+    public int getFlag() {
+        return flag1;
+    }
+
+    public void setFlag(int flag) {
+        this.flag1 = flag;
     }
 }

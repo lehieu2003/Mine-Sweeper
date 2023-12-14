@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements MouseListener {
         this.gameFrame = gameFrame;
         this.boom = bombNumber;
 
-        world = new World(w, h, bombNumber);
+        world = new World(w, h, bombNumber,this);
         setLayout(new BorderLayout());
         panel1 = new PanelNotification(this);
         add(panel1, BorderLayout.NORTH);
@@ -83,6 +83,10 @@ public class GamePanel extends JPanel implements MouseListener {
                 if (e.getButton() == 1 && e.getSource() == buttons[i][j] && !world.getArrayFlag()[i][j]) {
                     if (!getPanel1().getTime().isRunning()){
                         getPanel1().getTime().start();
+                    }else {
+                            getPanel1().getTime().stop();
+                            getPanel1().setNowTime(0);
+
                     }
                     if (!world.open(i, j)) {
                         if (world.isComplete()) {
@@ -143,5 +147,6 @@ public class GamePanel extends JPanel implements MouseListener {
     public void setPanel2(PanelPlayer panel2) {
         this.panel2 = panel2;
     }
+
 }
 

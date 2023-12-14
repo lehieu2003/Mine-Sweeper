@@ -30,20 +30,16 @@ public class PanelNotification extends JPanel{
         lbTime = gamePanel.getWorld().getTime();
         lbBoom= gamePanel.getWorld().getLbBoom();
 
-        String boom = String.valueOf(gamePanel.getWorld().getBoom());
-        if (boom.length() == 1 || boom.length() == 2) boom = "0" + boom;
-        else boom = boom;
-
-
-
-        panel1.add(lbBoom = new LabelNumber(this,"000"));
-        panel2.add(lbTime = new LabelNumber(this,"000"));
         this.time = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ++PanelNotification.this.nowTime;
                 PanelNotification.this.updateLbTime();
             }
         });
+
+        panel1.add(lbBoom = new LabelNumber(this,"000"));
+        panel2.add(lbTime = new LabelNumber(this,"000"));
+
     }
     public void updateLbTime() {
         if (this.nowTime > 999) {
@@ -60,7 +56,19 @@ public class PanelNotification extends JPanel{
 
             this.lbTime.repaint();
         }
+    }
 
+    public void updateLbBoom(){
+        String boom = String.valueOf(gamePanel.getBoom() - gamePanel.getWorld().getFlag());
+        if (boom.length() == 1){
+            lbBoom.setNumber("00"+boom);
+        }else if (boom.length() == 2) {
+            lbBoom.setNumber("0" + boom);
+        }else {
+            if (boom.length() == 3)
+                lbBoom.setNumber(boom);
+        }
+        lbBoom.repaint();
     }
 
     public GamePanel getGamePanel() {
