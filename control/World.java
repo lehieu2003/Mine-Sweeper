@@ -126,19 +126,17 @@ public class World extends JPanel {
             buttons[i][j].setNumber(number);
             buttons[i][j].repaint();
         }else{
-            if (number == -1){
-                buttons[i][j].setNumber(10);
-                    buttons[i][j].repaint();
-                    isComplete = true;
+            buttons[i][j].setNumber(10);
+            buttons[i][j].repaint();
+            isComplete = true;
 
-                    for (int l = 0; l < arrayBom.length; l++) {
-                        for (int k = 0; k < arrayBom[l].length; k++) {
-                            if (arrayBom[l][k] == -1 && !arrayBoolean[l][k]) {
-                                buttons[l][k].setNumber(10);
-                                buttons[l][k].repaint();
-                            }
-                        }
+            for (int l = 0; l < arrayBom.length; l++) {
+                for (int k = 0; k < arrayBom[l].length; k++) {
+                    if (arrayBom[l][k] == -1 && !arrayBoolean[l][k]) {
+                        buttons[l][k].setNumber(10);
+                        buttons[l][k].repaint();
                     }
+                }
             }
         }
     }

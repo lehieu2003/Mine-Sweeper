@@ -37,13 +37,15 @@ public class PanelNotification extends JPanel{
             }
         });
 
+
         panel1.add(lbBoom = new LabelNumber(this,"000"));
         panel2.add(lbTime = new LabelNumber(this,"000"));
+        this.updateLbBoom();
 
     }
     public void updateLbTime() {
         if (this.nowTime > 999) {
-            this.lbTime.setNumber("infinty");
+            this.lbTime.setNumber("infinity");
         } else {
             String cTime = String.valueOf(this.nowTime);
             if (cTime.length() == 1) {
