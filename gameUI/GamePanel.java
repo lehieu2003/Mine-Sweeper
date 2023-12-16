@@ -81,15 +81,14 @@ public class GamePanel extends JPanel implements MouseListener {
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons[i].length; j++) {
                 if (e.getButton() == 1 && e.getSource() == buttons[i][j] && !world.getArrayFlag()[i][j]) {
+
                     if (!getPanel1().getTime().isRunning()){
                         getPanel1().getTime().start();
-                    }else {
-                            getPanel1().getTime().stop();
-                            getPanel1().setNowTime(0);
-
                     }
+
                     if (!world.open(i, j)) {
                         if (world.isComplete()) {
+                            this.getPanel1().getTime().stop();
                             int option = JOptionPane.showConfirmDialog(null, "You lost! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
                             if (option == JOptionPane.YES_OPTION) {
                                 gameFrame.setVisible(false);
@@ -101,6 +100,7 @@ public class GamePanel extends JPanel implements MouseListener {
                                 world.fullTrue();
                             }
                         } else if (world.isEnd()) {
+                            this.getPanel1().getTime().stop();
                             int option = JOptionPane.showConfirmDialog(null, "You won! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
                             if (option == JOptionPane.YES_OPTION) {
                                 gameFrame.setVisible(false);

@@ -141,11 +141,6 @@ public class World extends JPanel {
         }
     }
 
-    private void handleWin() {
-        isEnd = true;
-        fullTrue();
-    }
-
     private boolean isValidCell(int i, int j) {
         return i >= 0 && i < arrayBom.length && j >= 0 && j < arrayBom[i].length;
     }
@@ -158,11 +153,17 @@ public class World extends JPanel {
             }
         }
     }
+
+    private void handleWin() {
+        isEnd = true;
+        fullTrue();
+    }
+
     public boolean checkWin(){
         int count = 0;
-        for (int i = 0; i < arrayBoolean.length; i++){
-            for (int j = 0; j < arrayBoolean[i].length; j++){
-                if (arrayBoolean[i][j]){
+        for (boolean[] booleans : arrayBoolean) {
+            for (boolean aBoolean : booleans) {
+                if (aBoolean) {
                     count++;
                 }
             }
