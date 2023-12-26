@@ -1,3 +1,8 @@
+/*
+Lê Nguyễn Quang Hiếu - ITITIU21201
+Phạm Văn Mạnh - ITITIU21241
+Phạm Hữu Duy Khánh - ITITIU19019
+ */
 package gameUI;
 import javax.swing.*;
 import java.awt.*;

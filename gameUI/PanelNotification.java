@@ -1,14 +1,16 @@
+/*
+Lê Nguyễn Quang Hiếu - ITITIU21201
+Phạm Văn Mạnh - ITITIU21241
+Phạm Hữu Duy Khánh - ITITIU19019
+ */
 package gameUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class PanelNotification extends JPanel{
-    private static final long serialVersionUID = 1L;
     private GamePanel gamePanel;
     private JPanel panel1,panel2;
     private LabelNumber lbTime,lbBoom;

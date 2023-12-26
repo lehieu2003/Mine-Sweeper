@@ -1,9 +1,12 @@
+/*
+Lê Nguyễn Quang Hiếu - ITITIU21201
+Phạm Văn Mạnh - ITITIU21241
+Phạm Hữu Duy Khánh - ITITIU19019
+ */
 package gameUI;
 import model.LoadData;
 
 import javax.swing.*;
-import java.awt.*;
-
 public class GameFrame extends JFrame{
     private LoadData loadData;
     private GamePanel gamePanel;
@@ -61,9 +64,7 @@ public class GameFrame extends JFrame{
 
         // add gamePanel into the gameFrame
         gamePanel = new GamePanel(width, height, boom,this);
-//        setLayout(new BorderLayout());
         add(gamePanel);
-//        setPreferredSize(new Dimension(500, 500));
         setTitle("Mine Sweeper");
 
         pack();
